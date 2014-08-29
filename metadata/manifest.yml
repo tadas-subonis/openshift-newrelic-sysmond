@@ -12,7 +12,6 @@ Website: https://github.com/tadas-subonis/openshift-newrelic.git
 Cartridge-Version: 1.0
 Cartridge-Vendor: tadas_subonis
 Categories:
-- embedded
 - plugin
 Provides:
 - newrelic-sysmond
@@ -24,6 +23,5 @@ Scaling:
   Max: -1
 Group-Overrides:
 - components:
-  - newrelic-sysmond
   - web_framework
   - database
