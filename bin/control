@@ -4,14 +4,14 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 function start() {
   if [ -z "${NEWRELIC_LICENSE_KEY}" ]; then
-    client_result "ERROR: You need to set the NEWRELIC_LICENSE_KEY before starting cartridge."
-    client_result "       rhc env set NEWRELIC_LICENSE_KEY=key"
-    client_result "       rhc cartridge restart newrelic-sysmond -a ${OPENSHIFT_APP_NAME}"
+    echo "ERROR: You need to set the NEWRELIC_LICENSE_KEY before starting cartridge."
+    echo "       rhc env set NEWRELIC_LICENSE_KEY=key"
+    echo "       rhc cartridge restart newrelic-sysmond -a ${OPENSHIFT_APP_NAME}"
     echo
   else
     echo "Starting NewRelic-sysmond cartridge"
     ${OPENSHIFT_NEWRELIC_SYSMOND_DIR}bin/nrsysmond \
-	-c ${OPENSHIFT_NEWRELIC_SYSMOND_DIR}nrsysmond.cfg
+	-c ${OPENSHIFT_NEWRELIC_SYSMOND_DIR}conf/nrsysmond.cfg
   fi
 }
 
