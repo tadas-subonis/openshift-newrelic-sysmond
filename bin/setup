@@ -15,8 +15,7 @@ rm -rf newrelic-sysmond
 echo "Moving"
 mv newrelic-sysmond-1.4.3.478-linux newrelic-sysmond
 
-rm -rf bin
-mkdir bin
+rm -rf bin/nrsysmond
 
 echo "Copying executable"
 cp newrelic-sysmond/daemon/nrsysmond.x64 bin/nrsysmond
