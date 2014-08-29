@@ -3,6 +3,7 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 echo "Entering control script with $1"
 
+OPENSHIFT_NEWRELIC_SYSMOND_PIDFILE=${OPENSHIFT_NEWRELIC_SYSMOND_DIR}run/newrelic-sysmond.pid
 OPENSHIFT_NEWRELIC_SYSMOND_CONFIG=${OPENSHIFT_NEWRELIC_SYSMOND_DIR}conf/nrsysmond.cfg
 
 function update_config() {
@@ -26,13 +27,16 @@ function start() {
       exit 1
     fi
     ${OPENSHIFT_NEWRELIC_SYSMOND_DIR}bin/nrsysmond \
-	-c ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG}
+	-c ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG} \
+	-p ${OPENSHIFT_NEWRELIC_SYSMOND_PIDFILE}
   fi
 }
 
 function stop() {
-    echo "Stopping NewRelic-sysmond cartridge"
-	killall nrsysmond
+	if [ -f "${OPENSHIFT_NEWRELIC_SYSMOND_PIDFILE}" ]; then
+		echo "Stopping NewRelic-sysmond cartridge"
+		kill `cat ${OPENSHIFT_NEWRELIC_SYSMOND_PIDFILE}`
+	fi
 }
 
 function restart() {

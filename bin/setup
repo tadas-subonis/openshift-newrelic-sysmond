@@ -20,3 +20,5 @@ rm -rf bin/nrsysmond
 echo "Copying executable"
 cp newrelic-sysmond/daemon/nrsysmond.x64 bin/nrsysmond
 
+rm -rf run
+mkdir run
