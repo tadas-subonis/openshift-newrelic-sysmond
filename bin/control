@@ -35,7 +35,7 @@ function start() {
 function stop() {
 	if [ -f "${OPENSHIFT_NEWRELIC_SYSMOND_PIDFILE}" ]; then
 		echo "Stopping NewRelic-sysmond cartridge"
-		kill `cat ${OPENSHIFT_NEWRELIC_SYSMOND_PIDFILE}`
+		kill -15 `cat ${OPENSHIFT_NEWRELIC_SYSMOND_PIDFILE}`
 	fi
 }
 
