@@ -3,6 +3,13 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 echo "Entering control script with $1"
 
+OPENSHIFT_NEWRELIC_SYSMOND_CONFIG=${OPENSHIFT_NEWRELIC_SYSMOND_DIR}conf/nrsysmond.cfg
+
+function update_config() {
+  (cat ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG} | envsubst) > /tmp/newrelicconf.tmp && mv /tmp/newrelicconf.tmp ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG}
+  chmod 0600 ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG}
+}
+
 function start() {
   echo "Preparing to start NewRelic Sysmond"
   
@@ -13,8 +20,13 @@ function start() {
     client_result
   else
     echo "Starting NewRelic-sysmond cartridge"
+    update_config
+	if [ ! -f ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG} ]; then
+      client_result "ERROR: Unabled to locate NewRelic config file."
+      exit 1
+    fi
     ${OPENSHIFT_NEWRELIC_SYSMOND_DIR}bin/nrsysmond \
-	-c ${OPENSHIFT_NEWRELIC_SYSMOND_DIR}conf/nrsysmond.cfg
+	-c ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG}
   fi
 }
 
