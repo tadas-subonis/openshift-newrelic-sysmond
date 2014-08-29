@@ -5,10 +5,10 @@ echo "Entering control script with $1"
 
 OPENSHIFT_NEWRELIC_SYSMOND_PIDFILE=${OPENSHIFT_NEWRELIC_SYSMOND_DIR}run/newrelic-sysmond.pid
 OPENSHIFT_NEWRELIC_SYSMOND_CONFIG=${OPENSHIFT_NEWRELIC_SYSMOND_DIR}conf/nrsysmond.cfg
-
+OPENSHIFT_NEWRELIC_SYSMOND_CONFIG_REAL=${OPENSHIFT_NEWRELIC_SYSMOND_DIR}conf/nrsysmond.cfg.real
 function update_config() {
-  (cat ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG} | envsubst) > /tmp/newrelicconf.tmp && mv /tmp/newrelicconf.tmp ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG}
-  chmod 0600 ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG}
+  (cat ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG} | envsubst) > /tmp/newrelicconf.tmp && mv /tmp/newrelicconf.tmp ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG_REAL}
+  chmod 0600 ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG_REAL}
 }
 
 function start() {
@@ -22,12 +22,12 @@ function start() {
   else
     echo "Starting NewRelic-sysmond cartridge"
     update_config
-	if [ ! -f ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG} ]; then
+	if [ ! -f ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG_REAL} ]; then
       client_result "ERROR: Unabled to locate NewRelic config file."
       exit 1
     fi
     ${OPENSHIFT_NEWRELIC_SYSMOND_DIR}bin/nrsysmond \
-	-c ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG} \
+	-c ${OPENSHIFT_NEWRELIC_SYSMOND_CONFIG_REAL} \
 	-p ${OPENSHIFT_NEWRELIC_SYSMOND_PIDFILE}
   fi
 }
