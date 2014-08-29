@@ -1,8 +1,11 @@
 #!/bin/bash -e
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
+echo "Entering control script with $1"
 
 function start() {
+  echo "Preparing to start NewRelic Sysmond"
+  
   if [ -z "${NEWRELIC_LICENSE_KEY}" ]; then
     echo "ERROR: You need to set the NEWRELIC_LICENSE_KEY before starting cartridge."
     echo "       rhc env set NEWRELIC_LICENSE_KEY=key"
