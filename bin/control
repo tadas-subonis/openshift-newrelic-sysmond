@@ -14,9 +14,9 @@ function update_config() {
 function start() {
   echo "Preparing to start NewRelic Sysmond"
   
-  if [ -z "${NEWRELIC_LICENSE_KEY}" ]; then
-    client_result "ERROR: You need to set the NEWRELIC_LICENSE_KEY before starting cartridge."
-    client_result "       rhc env set NEWRELIC_LICENSE_KEY=key"
+  if [ -z "${OPENSHIFT_NEWRELIC_LICENSE_KEY}" ]; then
+    client_result "ERROR: You need to set the OPENSHIFT_NEWRELIC_LICENSE_KEY before starting cartridge."
+    client_result "       rhc env set OPENSHIFT_NEWRELIC_LICENSE_KEY=key"
     client_result "       rhc cartridge restart newrelic-sysmond -a ${OPENSHIFT_APP_NAME}"
     client_result
   else
