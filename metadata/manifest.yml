@@ -3,9 +3,9 @@ Name: newrelic-sysmond
 Vendor: Red Hat
 Cartridge-Short-Name: NEWRELIC_SYSMOND
 Version: '1.0'
-Architecture: noarch
+Architecture: x86_64
 Display-Name: NewRelic Sysmond 1.0
-Description: System monitoring plugin from NewRelic
+Description: System monitoring plugin for NewRelic. Uses newrelic-sysmond.
 License: ASL 2.0
 License-Url: http://www.apache.org/licenses/LICENSE-2.0.txt
 Website: https://github.com/tadas-subonis/openshift-newrelic.git
