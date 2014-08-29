@@ -1,0 +1,16 @@
+#!/bin/bash -e
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+cd ${OPENSHIFT_MONIT_DIR}
+
+wget http://download.newrelic.com/server_monitor/release/newrelic-sysmond-1.4.3.478-linux.tar.gz
+
+tar -xvzf newrelic-sysmond-1.4.3.478-linux.tar.gz
+rm newrelic-sysmond-1.4.3.478-linux.tar.gz
+
+mv newrelic-sysmond-1.4.3.478-linux newrelic-sysmond
+
+mkdir bin
+
+cp newrelic-sysmond/daemon/nrsysmond.x64 bin/nrsysmond
+

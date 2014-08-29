@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+mv -rf newrelic-sysmond
+mv -rf bin
+
+

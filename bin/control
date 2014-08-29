@@ -3,34 +3,26 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 
 function start() {
-    echo "Starting Cron cartridge"
-    if _are_cronjobs_enabled; then
-        client_result "cron scheduling service is already enabled for gear $OPENSHIFT_GEAR_UUID"
-    else
-        touch "$OPENSHIFT_CRON_DIR/run/jobs.enabled"
-    fi
+  if [ -z "${NEWRELIC_LICENSE_KEY}" ]; then
+    client_result "ERROR: You need to set the NEWRELIC_LICENSE_KEY before starting cartridge."
+    client_result "       rhc env set NEWRELIC_LICENSE_KEY=key"
+    client_result "       rhc cartridge restart newrelic-sysmond -a ${OPENSHIFT_APP_NAME}"
+    echo
+  else
+    echo "Starting NewRelic-sysmond cartridge"
+    ${OPENSHIFT_NEWRELIC_SYSMOND_DIR}bin/nrsysmond \
+	-c ${OPENSHIFT_NEWRELIC_SYSMOND_DIR}nrsysmond.cfg
+  fi
 }
 
 function stop() {
-    echo "Stopping Cron cartridge"
-    if _are_cronjobs_enabled; then
-        rm -f $OPENSHIFT_CRON_DIR/run/jobs.enabled
-    else
-        client_result "cron scheduling service is already disabled for gear $OPENSHIFT_GEAR_UUID"
-    fi
+    echo "Stopping NewRelic-sysmond cartridge"
+	killall nrsysmond
 }
 
 function restart() {
 	stop
     start
-}
-
-
-
-function tidy() {
-  client_message "Emptying cron logs in dir: $OPENSHIFT_LOG_DIR"
-  shopt -s dotglob
-  rm -rf $OPENSHIFT_LOG_DIR/cron_*
 }
 
 case "$1" in
