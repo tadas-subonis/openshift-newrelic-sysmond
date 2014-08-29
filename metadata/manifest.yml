@@ -23,5 +23,4 @@ Scaling:
   Max: -1
 Group-Overrides:
 - components:
-  - web_framework
   - database
