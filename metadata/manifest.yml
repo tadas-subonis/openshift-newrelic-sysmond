@@ -13,7 +13,6 @@ Cartridge-Version: 1.0
 Cartridge-Vendor: tadas_subonis
 Categories:
 - plugin
-- embedded
 Provides:
 - newrelic-sysmond
 Publishes:
@@ -24,4 +23,4 @@ Scaling:
   Max: -1
 Group-Overrides:
 - components:
-  - database
+  - web_framework
