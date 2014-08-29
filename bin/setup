@@ -3,14 +3,18 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 cd ${OPENSHIFT_MONIT_DIR}
 
+echo "Downloading"
 wget http://download.newrelic.com/server_monitor/release/newrelic-sysmond-1.4.3.478-linux.tar.gz
 
+echo "Extracting"
 tar -xvzf newrelic-sysmond-1.4.3.478-linux.tar.gz
 rm newrelic-sysmond-1.4.3.478-linux.tar.gz
 
+echo "Moving"
 mv newrelic-sysmond-1.4.3.478-linux newrelic-sysmond
 
 mkdir bin
 
+echo "Copying executable"
 cp newrelic-sysmond/daemon/nrsysmond.x64 bin/nrsysmond
 
