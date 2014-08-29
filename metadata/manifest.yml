@@ -24,4 +24,5 @@ Scaling:
   Max: -1
 Group-Overrides:
 - components:
+  - newrelic-sysmond
   - web_framework
