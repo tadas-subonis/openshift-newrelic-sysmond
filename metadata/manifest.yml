@@ -8,7 +8,7 @@ Display-Name: NewRelic Sysmond 1.0
 Description: System monitoring plugin for NewRelic. Uses newrelic-sysmond.
 License: ASL 2.0
 License-Url: http://www.apache.org/licenses/LICENSE-2.0.txt
-Website: https://github.com/tadas-subonis/openshift-newrelic.git
+Website: https://github.com/jesucarr/openshift-newrelic-sysmond.git
 Cartridge-Version: 1.0
 Cartridge-Vendor: tadas_subonis
 Categories:
@@ -18,7 +18,7 @@ Provides:
 - newrelic-sysmond
 Publishes:
 Subscribes:
-Source-Url: https://github.com/tadas-subonis/openshift-newrelic.git
+Source-Url: https://github.com/jesucarr/openshift-newrelic-sysmond.git
 Scaling:
   Min: 1
   Max: -1
